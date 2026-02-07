@@ -8,24 +8,21 @@
     <link rel="icon" type="image/png" href="society_logo.png">
 
     <style>
-        /* --- CORE BACKGROUND & LAYERING --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         html, body {
             height: 100%;
-            background-color: #050505; /* Deep black for maximum color contrast */
+            background-color: #050505;
             font-family: 'Segoe UI', Tahoma, sans-serif;
             color: #e0e0e0;
             overflow-x: hidden;
         }
 
-        /* --- THE RGB BUBBLE LAYER (Placed at the very back) --- */
+        /* --- THE RGB BUBBLE LAYER --- */
         #bg-bubbles {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 1; 
             pointer-events: none;
         }
@@ -40,12 +37,12 @@
 
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 0; }
-            20% { opacity: 0.6; }
-            80% { opacity: 0.6; }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
             100% { transform: translateY(-115vh); opacity: 0; }
         }
 
-        /* --- PAGE CONTENT (Above Bubbles) --- */
+        /* --- CONTENT WRAPPER --- */
         .content-layer {
             position: relative;
             z-index: 10;
@@ -54,9 +51,9 @@
 
         header {
             padding: 25px;
-            background: rgba(0, 0, 0, 0.7); 
+            background: rgba(0, 0, 0, 0.75);
             border-bottom: 2px solid #00ff41;
-            backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px);
         }
 
         .society-text {
@@ -96,12 +93,6 @@
             text-transform: uppercase;
         }
 
-        .download-btn:hover {
-            background-color: #fff;
-            box-shadow: 0 0 30px #00ff41;
-            transform: scale(1.05);
-        }
-
         .screenshot-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -139,7 +130,7 @@
         <div class="game-card">
             <img src="wild_adventure_logo.png" alt="Wild Adventure Logo" class="wild-logo">
             <h1 style="font-size: 3.2rem; margin-bottom: 20px;">Wild Adventure</h1>
-            <p style="color: #bbb; margin-bottom: 30px; font-size: 1.1rem;">The premier survival journey from Oscar Kim.</p>
+            <p style="color: #bbb; margin-bottom: 30px;">The premier survival journey from Oscar Kim.</p>
             <a href="https://www.mediafire.com/file/utyh9232vd3u1bn/Wild_adventure-1_0_0-windows_%25281%2529.zip/file" 
                target="_blank" class="download-btn">DOWNLOAD NOW</a>
         </div>
@@ -160,37 +151,39 @@
     <script>
         const container = document.getElementById('bg-bubbles');
         const colors = [
-            'rgba(255, 0, 0, 0.5)',   /* Red */
-            'rgba(0, 255, 65, 0.5)',  /* Green */
-            'rgba(0, 150, 255, 0.5)'  /* Blue */
+            { bg: 'rgba(255, 0, 0, 0.5)', glow: 'rgba(255, 0, 0, 0.4)' },   // RED
+            { bg: 'rgba(0, 255, 65, 0.5)', glow: 'rgba(0, 255, 65, 0.4)' },  // GREEN
+            { bg: 'rgba(0, 150, 255, 0.5)', glow: 'rgba(0, 150, 255, 0.4)' } // BLUE
         ];
+
+        let colorPointer = 0;
 
         function createBubble() {
             const b = document.createElement('div');
             b.className = 'bubble';
             
-            // Randomize size and position
-            const size = Math.random() * 8 + 4 + 'px'; 
+            const size = Math.random() * 6 + 4 + 'px'; 
             b.style.width = size;
             b.style.height = size;
             b.style.left = Math.random() * 100 + '%';
             
-            // Assign one of the 3 RGB colors
-            const colorIndex = Math.floor(Math.random() * colors.length);
-            b.style.background = colors[colorIndex];
-            b.style.boxShadow = `0 0 10px ${colors[colorIndex]}`;
+            // Cycle through RGB based on the interval
+            const currentColor = colors[colorPointer];
+            b.style.background = currentColor.bg;
+            b.style.boxShadow = `0 0 10px ${currentColor.glow}`;
 
-            // Randomize speed
-            b.style.setProperty('--speed', Math.random() * 5 + 4 + 's');
-            
+            b.style.setProperty('--speed', Math.random() * 4 + 4 + 's');
             container.appendChild(b);
 
-            // Remove bubble from DOM after it finishes animating to save memory
-            setTimeout(() => { b.remove(); }, 9000);
+            // Cycle to the next color for the next bubble
+            colorPointer = (colorPointer + 1) % colors.length;
+
+            setTimeout(() => { b.remove(); }, 8000);
         }
 
-        // Generate a new bubble every 150ms for a high-density stream
-        setInterval(createBubble, 150);
+        // Interval: creates a new bubble every 100ms
+        // Result: Red-Green-Blue-Red-Green-Blue pattern
+        setInterval(createBubble, 100);
     </script>
 
 </body>
