@@ -1,190 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>k.games society | Wild Adventure</title>
+<style>
+    .ceo-log {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 30px;
+        background: rgba(15, 15, 15, 0.85); /* Semi-transparent for bubbles */
+        border-left: 4px solid #00ff41;
+        border-radius: 8px;
+        text-align: left;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .log-title {
+        color: #00ff41;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 10px;
+    }
+
+    .log-item {
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+
+    .log-tag {
+        color: #00ff41;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+</style>
+
+<div class="ceo-log">
+    <div class="log-title">System Status & Founder Notes</div>
     
-    <link rel="icon" type="image/png" href="society_logo.png">
-
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        html, body {
-            height: 100%;
-            background-color: #050505;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-
-        /* --- THE RGB BUBBLE LAYER --- */
-        #bg-bubbles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1; 
-            pointer-events: none;
-        }
-
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            bottom: -50px;
-            animation: floatUp var(--speed) infinite linear;
-            opacity: 0;
-        }
-
-        @keyframes floatUp {
-            0% { transform: translateY(0); opacity: 0; }
-            20% { opacity: 0.7; }
-            80% { opacity: 0.7; }
-            100% { transform: translateY(-115vh); opacity: 0; }
-        }
-
-        /* --- CONTENT WRAPPER --- */
-        .content-layer {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-        }
-
-        header {
-            padding: 25px;
-            background: rgba(0, 0, 0, 0.75);
-            border-bottom: 2px solid #00ff41;
-            backdrop-filter: blur(10px);
-        }
-
-        .society-text {
-            font-size: 1.1rem;
-            letter-spacing: 8px;
-            color: #00ff41;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .game-card {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 40px;
-            background: rgba(20, 20, 20, 0.85); 
-            border-radius: 15px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.9);
-        }
-
-        .wild-logo {
-            max-width: 250px;
-            display: block;
-            margin: 0 auto 20px;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background-color: #00ff41;
-            color: #000;
-            padding: 20px 50px;
-            font-size: 1.4rem;
-            font-weight: 900;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .screenshot-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .screenshot-grid img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid #444;
-        }
-
-        .founder-info {
-            margin-top: 100px;
-            padding: 60px 20px;
-            background: rgba(0, 0, 0, 0.8);
-            border-top: 1px solid #222;
-        }
-    </style>
-</head>
-<body>
-
-    <div id="bg-bubbles"></div>
-
-    <div class="content-layer">
-        <header>
-            <div class="society-text">k.games society</div>
-        </header>
-
-        <div class="game-card">
-            <img src="wild_adventure_logo.png" alt="Wild Adventure Logo" class="wild-logo">
-            <h1 style="font-size: 3.2rem; margin-bottom: 20px;">Wild Adventure</h1>
-            <p style="color: #bbb; margin-bottom: 30px;">The premier survival journey from Oscar Kim.</p>
-            <a href="https://www.mediafire.com/file/utyh9232vd3u1bn/Wild_adventure-1_0_0-windows_%25281%2529.zip/file" 
-               target="_blank" class="download-btn">DOWNLOAD NOW</a>
-        </div>
-
-        <h2 style="color: #00ff41; letter-spacing: 4px; margin-bottom: 30px;">IN-GAME VISUALS</h2>
-        <div class="screenshot-grid">
-            <img src="ss1.png" alt="SS1">
-            <img src="ss2.png" alt="SS2">
-            <img src="ss3.png" alt="SS3">
-        </div>
-
-        <div class="founder-info">
-            <p style="color: #00ff41; letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem;">Founder & CEO</p>
-            <h2 style="font-size: 2.5rem; color: #fff; margin: 0;">Oscar Kim</h2>
-        </div>
+    <div class="log-item">
+        <span class="log-tag">[01]</span> 
+        <strong>Version Tracking:</strong> Real-time synchronization of build 1.0.0.
     </div>
 
-    <script>
-        const container = document.getElementById('bg-bubbles');
-        const colors = [
-            { bg: 'rgba(255, 0, 0, 0.5)', glow: 'rgba(255, 0, 0, 0.4)' },   // RED
-            { bg: 'rgba(0, 255, 65, 0.5)', glow: 'rgba(0, 255, 65, 0.4)' },  // GREEN
-            { bg: 'rgba(0, 150, 255, 0.5)', glow: 'rgba(0, 150, 255, 0.4)' } // BLUE
-        ];
+    <div class="log-item">
+        <span class="log-tag">[02]</span> 
+        <strong>Development Status:</strong> Current focus is environment optimization and asset rendering.
+    </div>
 
-        let colorPointer = 0;
+    <div class="log-item">
+        <span class="log-tag">[03]</span> 
+        <strong>Personal Vision:</strong> A direct line from the CEO to the players regarding the future of the society.
+    </div>
 
-        function createBubble() {
-            const b = document.createElement('div');
-            b.className = 'bubble';
-            
-            const size = Math.random() * 6 + 4 + 'px'; 
-            b.style.width = size;
-            b.style.height = size;
-            b.style.left = Math.random() * 100 + '%';
-            
-            // Cycle through RGB based on the interval
-            const currentColor = colors[colorPointer];
-            b.style.background = currentColor.bg;
-            b.style.boxShadow = `0 0 10px ${currentColor.glow}`;
-
-            b.style.setProperty('--speed', Math.random() * 4 + 4 + 's');
-            container.appendChild(b);
-
-            // Cycle to the next color for the next bubble
-            colorPointer = (colorPointer + 1) % colors.length;
-
-            setTimeout(() => { b.remove(); }, 8000);
-        }
-
-        // Interval: creates a new bubble every 100ms
-        // Result: Red-Green-Blue-Red-Green-Blue pattern
-        setInterval(createBubble, 100);
-    </script>
-
-</body>
-</html>
+    <div class="log-item">
+        <span class="log-tag">[04]</span> 
+        <strong>Community Timeline:</strong> Recorded history of every major milestone and system update.
+    </div>
+</div>
