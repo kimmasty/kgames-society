@@ -3,39 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>k.games society | Wild Adventure</title>
-    
-    <link rel="icon" type="image/png" href="society_logo.png">
-
+    <title>k.games society</title>
     <style>
-        /* --- CORE STYLING --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: #050505; color: #e0e0e0; font-family: sans-serif; overflow-x: hidden; text-align: center; }
         
-        html, body {
-            height: 100%;
-            background-color: #050505;
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            color: #e0e0e0;
-            overflow-x: hidden;
-        }
-
-        /* --- THE RGB BUBBLE LAYER --- */
-        #bg-bubbles {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1; 
-            pointer-events: none;
-        }
-
-        .bubble {
-            position: absolute;
-            border-radius: 50%;
-            bottom: -50px;
-            animation: floatUp var(--speed) infinite linear;
-            opacity: 0;
-        }
-
+        #bg-bubbles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .bubble { position: absolute; border-radius: 50%; bottom: -50px; animation: floatUp var(--speed) infinite linear; opacity: 0; }
         @keyframes floatUp {
             0% { transform: translateY(0); opacity: 0; }
             20% { opacity: 0.7; }
@@ -43,61 +17,51 @@
             100% { transform: translateY(-115vh); opacity: 0; }
         }
 
-        /* --- CONTENT WRAPPER --- */
-        .content-layer {
-            position: relative;
-            z-index: 10;
-            text-align: center;
+        .content { position: relative; z-index: 10; padding: 20px; }
+        header { padding: 30px; border-bottom: 2px solid #00ff41; background: rgba(0,0,0,0.8); }
+        .game-card { max-width: 700px; margin: 50px auto; padding: 40px; background: rgba(20,20,20,0.9); border-radius: 15px; border: 1px solid #333; }
+        .download-btn { display: inline-block; background: #00ff41; color: #000; padding: 15px 40px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 20px; }
+        
+        .ceo-log { max-width: 700px; margin: 30px auto; padding: 20px; background: rgba(10,10,10,0.9); border-left: 4px solid #00ff41; text-align: left; }
+        .log-item { margin-bottom: 10px; font-size: 0.9rem; }
+        .log-tag { color: #00ff41; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div id="bg-bubbles"></div>
+    <div class="content">
+        <header><h2 style="letter-spacing: 5px; color:#00ff41;">K.GAMES SOCIETY</h2></header>
+        <div class="game-card">
+            <h1>WILD ADVENTURE</h1>
+            <p style="margin: 20px 0; color: #aaa;">Experience the premier survival journey.</p>
+            <a href="https://www.mediafire.com/file/utyh9232vd3u1bn/Wild_adventure-1_0_0-windows_%25281%2529.zip/file" class="download-btn">DOWNLOAD NOW</a>
+        </div>
+        <div class="ceo-log">
+            <h3 style="color:#00ff41; margin-bottom:15px;">CEO'S LOG</h3>
+            <div class="log-item"><span class="log-tag">[01]</span> Version 1.0.0 Synced.</div>
+            <div class="log-item"><span class="log-tag">[02]</span> Environment Optimization Active.</div>
+            <div class="log-item"><span class="log-tag">[03]</span> Personal Vision: Shaping the future of survival gaming.</div>
+            <div class="log-item"><span class="log-tag">[04]</span> Community Timeline: Recording every milestone.</div>
+        </div>
+    </div>
+    <script>
+        const container = document.getElementById('bg-bubbles');
+        const colors = ['rgba(255,0,0,0.5)', 'rgba(0,255,65,0.5)', 'rgba(0,150,255,0.5)'];
+        let ptr = 0;
+        function createB() {
+            const b = document.createElement('div');
+            b.className = 'bubble';
+            const s = Math.random() * 8 + 4 + 'px';
+            b.style.width = s; b.style.height = s;
+            b.style.left = Math.random() * 100 + '%';
+            b.style.background = colors[ptr];
+            b.style.boxShadow = `0 0 10px ${colors[ptr]}`;
+            b.style.setProperty('--speed', Math.random() * 4 + 4 + 's');
+            container.appendChild(b);
+            ptr = (ptr + 1) % colors.length;
+            setTimeout(() => b.remove(), 8000);
         }
-
-        header {
-            padding: 25px;
-            background: rgba(0, 0, 0, 0.75);
-            border-bottom: 2px solid #00ff41;
-            backdrop-filter: blur(10px);
-        }
-
-        .society-text {
-            font-size: 1.1rem;
-            letter-spacing: 8px;
-            color: #00ff41;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        .game-card {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 40px;
-            background: rgba(20, 20, 20, 0.85); 
-            border-radius: 15px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.9);
-        }
-
-        .wild-logo {
-            max-width: 250px;
-            display: block;
-            margin: 0 auto 20px;
-        }
-
-        .download-btn {
-            display: inline-block;
-            background-color: #00ff41;
-            color: #000;
-            padding: 20px 50px;
-            font-size: 1.4rem;
-            font-weight: 900;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-
-        .download-btn:hover {
-            background-color: #fff;
-            box-shadow: 0 0 30px #00ff41;
-            transform: scale(1.05);
-        }
-
-        /* ---
+        setInterval(createB, 150);
+    </script>
+</body>
+</html>
