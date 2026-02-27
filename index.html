@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>k.games society | Wild Adventure</title>
+    
     <link rel="icon" type="image/png" href="society_logo.png">
 
     <style>
+        /* --- RESET & CORE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body {
-            background-color: #020202;
+        html, body {
+            height: 100%;
+            background-color: #050505;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
             color: #e0e0e0;
-            font-family: 'Segoe UI', sans-serif;
             overflow-x: hidden;
-            height: 100vh;
         }
 
-        /* --- INTERACTIVE RGB BUBBLES --- */
+        /* --- RGB BUBBLES ENGINE --- */
         #bg-bubbles {
             position: fixed;
             top: 0; left: 0;
@@ -29,93 +31,113 @@
         .bubble {
             position: absolute;
             border-radius: 50%;
-            bottom: -100px;
+            bottom: -50px;
             animation: floatUp var(--speed) infinite linear;
             opacity: 0;
-            transition: transform 0.3s ease-out; /* For mouse reaction */
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) translateX(0); opacity: 0; }
-            20% { opacity: 0.8; }
-            80% { opacity: 0.8; }
-            100% { transform: translateY(-120vh) translateX(var(--drift)); opacity: 0; }
+            0% { transform: translateY(0); opacity: 0; }
+            20% { opacity: 0.7; }
+            80% { opacity: 0.7; }
+            100% { transform: translateY(-115vh); opacity: 0; }
         }
 
-        /* --- SHIFTING RGB BORDER --- */
-        .game-card {
-            max-width: 800px;
-            margin: 60px auto;
-            padding: 50px;
-            background: rgba(10, 10, 10, 0.9);
-            border-radius: 20px;
+        /* --- CONTENT WRAPPER --- */
+        .content-layer {
             position: relative;
             z-index: 10;
-            border: 2px solid transparent;
-            /* Animated RGB Border */
-            border-image: linear-gradient(45deg, #ff0000, #00ff41, #0096ff, #ff0000) 1;
-            box-shadow: 0 0 40px rgba(0,0,0,1);
+            text-align: center;
         }
 
         header {
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.8);
-            border-bottom: 3px solid #00ff41;
-            position: relative;
-            z-index: 10;
-            letter-spacing: 10px;
+            padding: 25px;
+            background: rgba(0, 0, 0, 0.75);
+            border-bottom: 2px solid #00ff41;
+            backdrop-filter: blur(10px);
+        }
+
+        .society-text {
+            font-size: 1.1rem;
+            letter-spacing: 8px;
             color: #00ff41;
             text-transform: uppercase;
-            font-weight: 900;
+            font-weight: bold;
+        }
+
+        .game-card {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: rgba(20, 20, 20, 0.85); 
+            border-radius: 15px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.9);
+        }
+
+        .wild-logo {
+            max-width: 250px;
+            display: block;
+            margin: 0 auto 20px;
         }
 
         .download-btn {
             display: inline-block;
-            background: #00ff41;
+            background-color: #00ff41;
             color: #000;
-            padding: 20px 60px;
-            font-size: 1.5rem;
+            padding: 20px 50px;
+            font-size: 1.4rem;
             font-weight: 900;
             text-decoration: none;
-            border-radius: 10px;
-            transition: 0.4s;
-            margin-top: 30px;
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+            border-radius: 8px;
+            transition: 0.3s;
+            text-transform: uppercase;
         }
 
         .download-btn:hover {
-            background: #fff;
-            box-shadow: 0 0 50px #00ff41;
-            transform: translateY(-5px) scale(1.05);
+            background-color: #fff;
+            box-shadow: 0 0 30px #00ff41;
+            transform: scale(1.05);
         }
 
+        /* --- GALLERY --- */
         .screenshot-grid {
-            display: flex;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            padding: 40px;
-            position: relative;
-            z-index: 10;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
         .screenshot-grid img {
-            width: 300px;
-            border-radius: 15px;
-            border: 2px solid #222;
-            transition: 0.5s;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #444;
         }
 
-        .screenshot-grid img:hover {
-            transform: scale(1.1);
-            border-color: #00ff41;
+        /* --- DUAL FOUNDER SECTION --- */
+        .founder-info {
+            margin-top: 100px;
+            padding: 60px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            border-top: 1px solid #222;
         }
 
-        .founder {
-            margin-top: 50px;
-            padding: 40px;
-            color: #888;
-            font-size: 0.8rem;
-            letter-spacing: 5px;
+        .founder-names {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .founder-card h2 {
+            font-size: 2.2rem;
+            color: #fff;
+            margin: 0;
         }
     </style>
 </head>
@@ -123,72 +145,70 @@
 
     <div id="bg-bubbles"></div>
 
-    <div class="content">
-        <header>k.games society</header>
+    <div class="content-layer">
+        <header>
+            <div class="society-text">k.games society</div>
+        </header>
 
         <div class="game-card">
-            <img src="wild_adventure_logo.png" alt="Logo" style="max-width:200px; margin-bottom:20px;">
-            <h1 style="font-size: 3.5rem; letter-spacing: 2px;">WILD ADVENTURE</h1>
-            <p style="color: #666; font-size: 1.2rem;">THE ULTIMATE SURVIVAL PROTOCOL</p>
+            <img src="wild_adventure_logo.png" alt="Wild Adventure Logo" class="wild-logo">
+            <h1 style="font-size: 3.2rem; margin-bottom: 20px;">Wild Adventure</h1>
+            <p style="color: #bbb; margin-bottom: 30px;">The premier survival journey from Oscar Kim.</p>
             <a href="https://www.mediafire.com/file/utyh9232vd3u1bn/Wild_adventure-1_0_0-windows_%25281%2529.zip/file" 
-               class="download-btn">INITIATE DOWNLOAD</a>
+               target="_blank" class="download-btn">DOWNLOAD NOW</a>
         </div>
 
+        <h2 style="color: #00ff41; letter-spacing: 4px; margin-bottom: 30px;">IN-GAME VISUALS</h2>
         <div class="screenshot-grid">
             <img src="ss1.png" alt="SS1">
             <img src="ss2.png" alt="SS2">
             <img src="ss3.png" alt="SS3">
         </div>
 
-        <div class="founder">FOUNDER & CEO // OSCAR KIM</div>
+        <div class="founder-info">
+            <p style="color: #00ff41; letter-spacing: 5px; text-transform: uppercase; font-size: 0.8rem;">Founders & CEOs</p>
+            <div class="founder-names">
+                <div class="founder-card">
+                    <h2>Oscar Kim</h2>
+                </div>
+                <div class="founder-card">
+                    <h2>Robert (Barreta)</h2>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
         const container = document.getElementById('bg-bubbles');
         const colors = [
-            { bg: 'rgba(255, 0, 0, 0.6)', glow: '#ff0000' },
-            { bg: 'rgba(0, 255, 65, 0.6)', glow: '#00ff41' },
-            { bg: 'rgba(0, 150, 255, 0.6)', glow: '#0096ff' }
+            { bg: 'rgba(255, 0, 0, 0.5)', glow: 'rgba(255, 0, 0, 0.4)' },   // RED
+            { bg: 'rgba(0, 255, 65, 0.5)', glow: 'rgba(0, 255, 65, 0.4)' },  // GREEN
+            { bg: 'rgba(0, 150, 255, 0.5)', glow: 'rgba(0, 150, 255, 0.4)' } // BLUE
         ];
 
-        let ptr = 0;
+        let colorPointer = 0;
 
         function createBubble() {
             const b = document.createElement('div');
             b.className = 'bubble';
-            const size = Math.random() * 12 + 5 + 'px';
+            const size = Math.random() * 6 + 4 + 'px'; 
             b.style.width = size;
             b.style.height = size;
             b.style.left = Math.random() * 100 + '%';
             
-            const color = colors[ptr];
-            b.style.background = color.bg;
-            b.style.boxShadow = `0 0 15px ${color.glow}`;
-            
-            b.style.setProperty('--speed', Math.random() * 3 + 3 + 's');
-            b.style.setProperty('--drift', (Math.random() * 200 - 100) + 'px');
+            const currentColor = colors[colorPointer];
+            b.style.background = currentColor.bg;
+            b.style.boxShadow = `0 0 10px ${currentColor.glow}`;
 
+            b.style.setProperty('--speed', Math.random() * 4 + 4 + 's');
             container.appendChild(b);
-            ptr = (ptr + 1) % colors.length;
 
-            setTimeout(() => { b.remove(); }, 6000);
+            colorPointer = (colorPointer + 1) % colors.length;
+            setTimeout(() => { b.remove(); }, 8000);
         }
 
-        setInterval(createBubble, 100);
-
-        // Mouse move effect: Bubbles react to your cursor
-        document.addEventListener('mousemove', (e) => {
-            const bubbles = document.querySelectorAll('.bubble');
-            bubbles.forEach(bubble => {
-                const rect = bubble.getBoundingClientRect();
-                const dx = e.clientX - rect.left;
-                const dy = e.clientY - rect.top;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if (dist < 100) {
-                    bubble.style.transform = `translateX(${dx * -0.5}px) translateY(${dy * -0.5}px)`;
-                }
-            });
-        });
+        setInterval(createBubble, 120);
     </script>
+
 </body>
 </html>
