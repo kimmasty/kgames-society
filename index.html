@@ -1,334 +1,296 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>k.games society | Wild Adventure</title>
-    <style>
-        /* --- CORE STYLES & THEME --- */
-        :root {
-            --bg-main: #0a0a0a;
-            --bg-sidebar: #0f0f0f;
-            --bg-card: #161616;
-            --accent: #00ff41; /* Kept your signature green */
-            --text-main: #ffffff;
-            --text-sub: #aaaaaa;
-            --sidebar-width: 240px;
-        }
+/* ============================================
+   k.games society — shared styles
+   ============================================ */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+:root {
+    --bg-main: #0a0a0a;
+    --bg-sidebar: #0f0f0f;
+    --bg-card: #161616;
+    --accent: #00ff41;
+    --text-main: #ffffff;
+    --text-sub: #aaaaaa;
+    --sidebar-width: 240px;
+}
 
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            display: flex;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        /* --- SIDEBAR NAVIGATION --- */
-        aside {
-            width: var(--sidebar-width);
-            background-color: var(--bg-sidebar);
-            border-right: 1px solid #1a1a1a;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            padding: 30px 20px;
-            display: flex;
-            flex-direction: column;
-            z-index: 100;
-        }
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
 
-        .brand-logo {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
+/* --- SIDEBAR NAVIGATION --- */
+aside {
+    width: var(--sidebar-width);
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid #1a1a1a;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
 
-        .nav-menu {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+.brand-logo {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}
 
-        .nav-item a {
-            display: block;
-            color: var(--text-sub);
-            text-decoration: none;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.2s ease;
-            cursor: pointer;
-        }
+.nav-menu {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-        .nav-item.active a, .nav-item a:hover {
-            color: var(--text-main);
-            background-color: rgba(255, 255, 255, 0.05);
-            border-left: 3px solid var(--accent);
-            padding-left: 12px;
-        }
+.nav-item a {
+    display: block;
+    color: var(--text-sub);
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
+}
 
-        /* --- MAIN VIEWPORT LAYER --- */
-        main {
-            margin-left: var(--sidebar-width);
-            flex: 1;
-            padding: 40px 60px;
-            width: calc(100% - var(--sidebar-width));
-        }
+.nav-item.active a, .nav-item a:hover {
+    color: var(--text-main);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--accent);
+    padding-left: 12px;
+}
 
-        /* --- PLAY STORE APP HEADER --- */
-        .app-header {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            margin-bottom: 40px;
-        }
+/* --- MAIN VIEWPORT LAYER --- */
+main {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding-bottom: 50px;
+    width: calc(100% - var(--sidebar-width));
+}
 
-        .app-icon {
-            width: 120px;
-            height: 120px;
-            border-radius: 24px;
-            object-fit: cover;
-            background: #222;
-            border: 1px solid #333;
-        }
+/* --- CINEMATIC HERO BANNER --- */
+.hero {
+    position: relative;
+    height: 55vh;
+    min-height: 400px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.1), var(--bg-main)),
+                url('ss1.png') center/cover no-repeat;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px 60px;
+}
 
-        .app-title-box h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
+.hero-content {
+    max-width: 600px;
+    z-index: 2;
+}
 
-        .app-developer {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 15px;
-        }
+.hero-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    font-weight: 900;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
 
-        .genre-tags {
-            display: flex;
-            gap: 10px;
-        }
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    line-height: 1.1;
+}
 
-        .tag {
-            background: #1f1f1f;
-            color: var(--text-sub);
-            padding: 5px 14px;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
+.hero-desc {
+    color: var(--text-sub);
+    font-size: 1.05rem;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
 
-        /* --- PLAY STORE METRICS BAR --- */
-        .metrics-bar {
-            display: flex;
-            gap: 40px;
-            border-top: 1px solid #1a1a1a;
-            border-bottom: 1px solid #1a1a1a;
-            padding: 20px 0;
-            margin-bottom: 40px;
-            max-width: 600px;
-        }
+.btn-prime {
+    display: inline-block;
+    background: #ffffff;
+    color: #000000;
+    text-decoration: none;
+    padding: 14px 35px;
+    font-weight: 700;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: transform 0.2s, background 0.2s;
+    border: none;
+    cursor: pointer;
+}
 
-        .metric-item {
-            text-align: center;
-            position: relative;
-        }
+.btn-prime:hover {
+    background: var(--accent);
+    transform: scale(1.03);
+}
 
-        .metric-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: -20px;
-            top: 20%;
-            height: 60%;
-            width: 1px;
-            background: #222;
-        }
+/* --- Smaller hero used on category pages --- */
+.hero.hero-compact {
+    height: 32vh;
+    min-height: 260px;
+}
 
-        .metric-value {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 4px;
-        }
+.hero.hero-compact .hero-title {
+    font-size: 2.4rem;
+}
 
-        .metric-label {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+/* --- DYNAMIC MEDIA BROWSING ROWS --- */
+.shelf-container {
+    padding: 40px 60px 0;
+}
 
-        /* --- ACTION BUTTONS --- */
-        .action-row {
-            margin-bottom: 40px;
-        }
+.shelf-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-        .btn-install {
-            display: inline-block;
-            background: var(--accent);
-            color: #000;
-            text-decoration: none;
-            padding: 14px 45px;
-            font-weight: 700;
-            border-radius: 8px;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-            transition: transform 0.2s, background 0.2s;
-        }
+.shelf-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #1a1a1a;
+}
 
-        .btn-install:hover {
-            background: #ffffff;
-            transform: scale(1.02);
-        }
+.shelf-subtitle {
+    color: var(--text-sub);
+    font-size: 0.9rem;
+    margin: -12px 0 20px;
+}
 
-        /* --- PLAY STORE SCREENSHOTS SLIDER --- */
-        .shelf-container {
-            margin-bottom: 40px;
-        }
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+}
 
-        .shelf-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #fff;
-        }
+.game-card {
+    background: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #1f1f1f;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 
-        .screenshots-carousel {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-            scrollbar-width: thin;
-            scrollbar-color: #333 transparent;
-        }
+.game-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+}
 
-        .screenshots-carousel::-webkit-scrollbar {
-            height: 6px;
-        }
+.thumbnail-box {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    background: #222;
+}
 
-        .screenshots-carousel::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 10px;
-        }
+.thumbnail-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .screenshot-item {
-            flex: 0 0 auto;
-            width: 320px;
-            height: 180px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #1f1f1f;
-        }
+.card-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.75);
+    color: var(--accent);
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
 
-        .screenshot-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+.card-details {
+    padding: 15px;
+}
 
-        /* --- DESCRIPTION SECTION --- */
-        .description-box {
-            max-width: 800px;
-            line-height: 1.6;
-            color: var(--text-sub);
-            font-size: 0.95rem;
-        }
+.card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-        /* --- RESPONSIVE DESIGN --- */
-        @media (max-width: 900px) {
-            aside { display: none; }
-            main { margin-left: 0; width: 100%; padding: 30px 20px; }
-            .app-header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .app-icon { width: 90px; height: 90px; border-radius: 18px; }
-            .app-title-box h1 { font-size: 2rem; }
-            .metrics-bar { gap: 20px; }
-        }
-    </style>
-</head>
-<body>
+.card-meta {
+    font-size: 0.85rem;
+    color: var(--text-sub);
+}
 
-    <!-- SIDE NAVIGATION FOR CATEGORIES -->
-    <aside>
-        <div class="brand-logo">k.games</div>
-        <ul class="nav-menu">
-            <li class="nav-menu" id="nav-survival"><a href="#">Survival</a></li>
-            <li class="nav-menu" id="nav-action"><a href="#">Action</a></li>
-        </ul>
-    </aside>
+/* --- Empty state notice (used when a category has no dedicated titles yet) --- */
+.notice-strip {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-card);
+    border: 1px dashed #2a2a2a;
+    border-radius: 8px;
+    padding: 14px 18px;
+    color: var(--text-sub);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+}
 
-    <!-- PLAY STORE MAIN PRODUCT PAGE LAYOUT -->
-    <main>
-        
-        <!-- TOP APP IDENTITY ROW -->
-        <section class="app-header">
-            <img src="wild_adventure_logo.png" alt="Wild Adventure Icon" class="app-icon">
-            <div class="app-title-box">
-                <h1>Wild Adventure</h1>
-                <div class="app-developer">Oscar Kim & Robert (Barreta)</div>
-                <div class="genre-tags">
-                    <span class="tag">Survival</span>
-                    <span class="tag">Action</span>
-                    <span class="tag">Single Player</span>
-                </div>
-            </div>
-        </section>
+.notice-strip strong {
+    color: var(--text-main);
+}
 
-        <!-- CTA PRIMARY DOWNLOAD ZONE -->
-        <section class="action-row">
-            <a href="https://www.mediafire.com/file/utyh9232vd3u1bn/Wild_adventure-1_0_0-windows_%25281%2529.zip/file" target="_blank" class="btn-install">Install</a>
-        </section>
-
-        <!-- DATA METRICS PREVIEW BAR -->
-        <section class="metrics-bar">
-            <div class="metric-item">
-                <div class="metric-value">4.9 ★</div>
-                <div class="metric-label">Reviews</div>
-            </div>
-            <div class="metric-item">
-                <div class="metric-value">v1.0.0</div>
-                <div class="metric-label">Current Version</div>
-            </div>
-            <div class="metric-item">
-                <div class="metric-value">Windows</div>
-                <div class="metric-label">Platform</div>
-            </div>
-        </section>
-
-        <!-- HORIZONTAL SCREENSHOTS SCROLLER -->
-        <section class="shelf-container">
-            <h2 class="shelf-title">Screenshots</h2>
-            <div class="screenshots-carousel">
-                <div class="screenshot-item"><img src="ss1.png" alt="Gameplay View 1"></div>
-                <div class="screenshot-item"><img src="ss2.png" alt="Gameplay View 2"></div>
-                <div class="screenshot-item"><img src="ss3.png" alt="Gameplay View 3"></div>
-            </div>
-        </section>
-
-        <!-- APP CONTENT OVERVIEW -->
-        <section class="shelf-container">
-            <h2 class="shelf-title">About this game</h2>
-            <div class="description-box">
-                <p>The premier dark survival journey from k.games society. Explore uncharted environments, harvest raw resources, manage your tools, and fight off the elements to survive the wild landscape.</p>
-            </div>
-        </section>
-
-    </main>
-
-</body>
-</html>
+/* --- RESPONSIVE MEDIA QUERIES --- */
+@media (max-width: 900px) {
+    aside {
+        display: none;
+    }
+    main {
+        margin-left: 0;
+        width: 100%;
+    }
+    .hero {
+        padding: 40px 30px;
+    }
+    .shelf-container {
+        padding: 30px 30px 0;
+    }
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
