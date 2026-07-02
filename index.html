@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>k.games society | Dashboard</title>
+    <title>k.games society | Wild Adventure</title>
     <style>
         /* --- CORE STYLES & THEME --- */
         :root {
@@ -72,6 +72,7 @@
             font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.2s ease;
+            cursor: pointer;
         }
 
         .nav-item.active a, .nav-item a:hover {
@@ -85,241 +86,248 @@
         main {
             margin-left: var(--sidebar-width);
             flex: 1;
-            padding-bottom: 50px;
+            padding: 40px 60px;
             width: calc(100% - var(--sidebar-width));
         }
 
-        /* --- CINEMATIC HERO BANNER --- */
-        .hero {
-            position: relative;
-            height: 55vh;
-            min-height: 400px;
-            width: 100%;
-            background: linear-gradient(to bottom, rgba(10,10,10,0.1), var(--bg-main)), 
-                        url('ss1.png') center/cover no-repeat; /* Replace with your wide visual */
+        /* --- PLAY STORE APP HEADER --- */
+        .app-header {
             display: flex;
-            align-items: flex-end;
-            padding: 40px 60px;
-        }
-
-        .hero-content {
-            max-width: 600px;
-            z-index: 2;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: var(--accent);
-            color: #000;
-            font-weight: 900;
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 4px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 12px;
-            line-height: 1.1;
-        }
-
-        .hero-desc {
-            color: var(--text-sub);
-            font-size: 1.05rem;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .btn-prime {
-            display: inline-block;
-            background: #ffffff;
-            color: #000000;
-            text-decoration: none;
-            padding: 14px 35px;
-            font-weight: 700;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: transform 0.2s, background 0.2s;
-        }
-
-        .btn-prime:hover {
-            background: var(--accent);
-            transform: scale(1.03);
-        }
-
-        /* --- DYNAMIC MEDIA BROWSING ROWS --- */
-        .shelf-container {
-            padding: 40px 60px 0;
-        }
-
-        .shelf-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-            display: flex;
+            gap: 30px;
             align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            object-fit: cover;
+            background: #222;
+            border: 1px solid #333;
+        }
+
+        .app-title-box h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .app-developer {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .genre-tags {
+            display: flex;
             gap: 10px;
         }
 
-        .shelf-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: #1a1a1a;
+        .tag {
+            background: #1f1f1f;
+            color: var(--text-sub);
+            padding: 5px 14px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
         }
 
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 25px;
+        /* --- PLAY STORE METRICS BAR --- */
+        .metrics-bar {
+            display: flex;
+            gap: 40px;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            padding: 20px 0;
+            margin-bottom: 40px;
+            max-width: 600px;
         }
 
-        .game-card {
-            background: var(--bg-card);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #1f1f1f;
-            cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s;
-        }
-
-        .game-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-        }
-
-        .thumbnail-box {
+        .metric-item {
+            text-align: center;
             position: relative;
-            width: 100%;
-            height: 140px;
+        }
+
+        .metric-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: -20px;
+            top: 20%;
+            height: 60%;
+            width: 1px;
             background: #222;
         }
 
-        .thumbnail-box img {
+        .metric-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- ACTION BUTTONS --- */
+        .action-row {
+            margin-bottom: 40px;
+        }
+
+        .btn-install {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            text-decoration: none;
+            padding: 14px 45px;
+            font-weight: 700;
+            border-radius: 8px;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-install:hover {
+            background: #ffffff;
+            transform: scale(1.02);
+        }
+
+        /* --- PLAY STORE SCREENSHOTS SLIDER --- */
+        .shelf-container {
+            margin-bottom: 40px;
+        }
+
+        .shelf-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        .screenshots-carousel {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: #333 transparent;
+        }
+
+        .screenshots-carousel::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .screenshots-carousel::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 10px;
+        }
+
+        .screenshot-item {
+            flex: 0 0 auto;
+            width: 320px;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #1f1f1f;
+        }
+
+        .screenshot-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .card-tag {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: rgba(0, 0, 0, 0.75);
-            color: var(--accent);
-            font-size: 0.7rem;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .card-details {
-            padding: 15px;
-        }
-
-        .card-title {
-            font-size: 1.05rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .card-meta {
-            font-size: 0.85rem;
+        /* --- DESCRIPTION SECTION --- */
+        .description-box {
+            max-width: 800px;
+            line-height: 1.6;
             color: var(--text-sub);
+            font-size: 0.95rem;
         }
 
-        /* --- RESPONSIVE MEDIA QUERIES --- */
+        /* --- RESPONSIVE DESIGN --- */
         @media (max-width: 900px) {
-            aside {
-                display: none; /* In production, add a mobile burger overlay here */
-            }
-            main {
-                margin-left: 0;
-                width: 100%;
-            }
-            .hero {
-                padding: 40px 30px;
-            }
-            .shelf-container {
-                padding: 30px 30px 0;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
+            aside { display: none; }
+            main { margin-left: 0; width: 100%; padding: 30px 20px; }
+            .app-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .app-icon { width: 90px; height: 90px; border-radius: 18px; }
+            .app-title-box h1 { font-size: 2rem; }
+            .metrics-bar { gap: 20px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- SIDE NAVIGATION FOR CATEGORIES -->
     <aside>
         <div class="brand-logo">k.games</div>
         <ul class="nav-menu">
-            <li class="nav-item active"><a href="#">Home</a></li>
-            <li class="nav-item"><a href="#">Survival</a></li>
-            <li class="nav-item"><a href="#">Action</a></li>
-            <li class="nav-item"><a href="#">Multiplayer</a></li>
-            <li class="nav-item"><a href="#">Founders Info</a></li>
+            <li class="nav-menu" id="nav-survival"><a href="#">Survival</a></li>
+            <li class="nav-menu" id="nav-action"><a href="#">Action</a></li>
         </ul>
     </aside>
 
+    <!-- PLAY STORE MAIN PRODUCT PAGE LAYOUT -->
     <main>
-        <section class="hero">
-            <div class="hero-content">
-                <span class="hero-badge">Featured Title</span>
-                <h1 class="hero-title">Wild Adventure</h1>
-                <p class="hero-desc">The premier dark survival journey from Oscar Kim & Robert (Barreta). Explore uncharted environments, harvest raw resources, and survive the wild elements.</p>
-                <a href="https://www.mediafire.com/file/utyh9232vd3u1bn/Wild_adventure-1_0_0-windows_%25281%2529.zip/file" target="_blank" class="btn-prime">Play Now</a>
+        
+        <!-- TOP APP IDENTITY ROW -->
+        <section class="app-header">
+            <img src="wild_adventure_logo.png" alt="Wild Adventure Icon" class="app-icon">
+            <div class="app-title-box">
+                <h1>Wild Adventure</h1>
+                <div class="app-developer">Oscar Kim & Robert (Barreta)</div>
+                <div class="genre-tags">
+                    <span class="tag">Survival</span>
+                    <span class="tag">Action</span>
+                    <span class="tag">Single Player</span>
+                </div>
             </div>
         </section>
 
+        <!-- CTA PRIMARY DOWNLOAD ZONE -->
+        <section class="action-row">
+            <a href="https://www.mediafire.com/file/utyh9232vd3u1bn/Wild_adventure-1_0_0-windows_%25281%2529.zip/file" target="_blank" class="btn-install">Install</a>
+        </section>
+
+        <!-- DATA METRICS PREVIEW BAR -->
+        <section class="metrics-bar">
+            <div class="metric-item">
+                <div class="metric-value">4.9 ★</div>
+                <div class="metric-label">Reviews</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-value">v1.0.0</div>
+                <div class="metric-label">Current Version</div>
+            </div>
+            <div class="metric-item">
+                <div class="metric-value">Windows</div>
+                <div class="metric-label">Platform</div>
+            </div>
+        </section>
+
+        <!-- HORIZONTAL SCREENSHOTS SCROLLER -->
         <section class="shelf-container">
-            <h2 class="shelf-title">All Experiences</h2>
-            <div class="media-grid">
-                
-                <div class="game-card">
-                    <div class="thumbnail-box">
-                        <img src="ss1.png" alt="Wild Adventure Preview">
-                        <span class="card-tag">v1.0.0</span>
-                    </div>
-                    <div class="card-details">
-                        <h3 class="card-title">Wild Adventure</h3>
-                        <p class="card-meta">Survival • Windows</p>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <div class="thumbnail-box">
-                        <img src="ss2.png" alt="Project 2 Preview">
-                        <span class="card-tag">Beta</span>
-                    </div>
-                    <div class="card-details">
-                        <h3 class="card-title">Project Barreta</h3>
-                        <p class="card-meta">Action • Coming Soon</p>
-                    </div>
-                </div>
-
-                <div class="game-card">
-                    <div class="thumbnail-box">
-                        <img src="ss3.png" alt="Project 3 Preview">
-                        <span class="card-tag">Alpha</span>
-                    </div>
-                    <div class="card-details">
-                        <h3 class="card-title">Society Sandbox</h3>
-                        <p class="card-meta">Simulation • In Dev</p>
-                    </div>
-                </div>
-
+            <h2 class="shelf-title">Screenshots</h2>
+            <div class="screenshots-carousel">
+                <div class="screenshot-item"><img src="ss1.png" alt="Gameplay View 1"></div>
+                <div class="screenshot-item"><img src="ss2.png" alt="Gameplay View 2"></div>
+                <div class="screenshot-item"><img src="ss3.png" alt="Gameplay View 3"></div>
             </div>
         </section>
+
+        <!-- APP CONTENT OVERVIEW -->
+        <section class="shelf-container">
+            <h2 class="shelf-title">About this game</h2>
+            <div class="description-box">
+                <p>The premier dark survival journey from k.games society. Explore uncharted environments, harvest raw resources, manage your tools, and fight off the elements to survive the wild landscape.</p>
+            </div>
+        </section>
+
     </main>
 
 </body>
